@@ -32,4 +32,33 @@ describe('/GET /api/jokes', function()
                     })
             })
     })
+
+    test('returning array is not empty', function()
+    {
+        const user1 = {
+            username: 'test2',
+            password: 'password123'
+        };
+
+        return request(server)
+            .post('/api/auth/register')
+            .send(user1)
+            .then(res =>
+            {
+                return request(server)
+                    .post('/api/auth/login')
+                    .send(user1)
+                    .then(res =>
+                    {
+                        const token = res.body.token
+                        return request(server)
+                            .get('/api/jokes')
+                            .set('Authorization', token)
+                            .then(res =>
+                            {
+                                expect(res.body.length).toBeGreaterThan(0);
+                            })
+                    })
+            })
+    })
 })
