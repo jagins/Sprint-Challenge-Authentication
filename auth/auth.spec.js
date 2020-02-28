@@ -27,7 +27,7 @@ describe('POST /api/auth/register', function()
         };
 
         return request(server)
-            .post('/api/register')
+            .post('/api/auth/register')
             .send(user)
             .then(res =>
             {
@@ -35,4 +35,23 @@ describe('POST /api/auth/register', function()
             })
     })
 
+})
+
+describe('POST /api/auth/login', function()
+{
+    test('should get the error message when providing invalid password', function()
+    {
+        const user = {
+            username: 'test1',
+            password: 'password1'
+        };
+
+        return request(server)
+            .post('/api/auth/login')
+            .send(user)
+            .then(res =>
+            {
+                expect(res.body.error).toBe('username or password is invalid')
+            })
+    })
 })
