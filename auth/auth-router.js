@@ -20,7 +20,7 @@ router.post('/register', (req, res) => {
     Users.addUser(user)
     .then(createdUser =>
     {
-      res.status(200).json(createdUser);
+      res.status(201).json(createdUser);
     })
     .catch(error =>
     {
