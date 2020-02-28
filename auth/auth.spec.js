@@ -54,4 +54,20 @@ describe('POST /api/auth/login', function()
                 expect(res.body.error).toBe('username or password is invalid')
             })
     })
+
+    test('token should be a string', function()
+    {
+        const user = {
+            username: 'test2',
+            password: 'password123'
+        };
+
+        return request(server)
+            .post('/api/auth/login')
+            .send(user)
+            .then(res =>
+            {
+                expect(typeof res.body.token).toBe('string');
+            })
+    })
 })
