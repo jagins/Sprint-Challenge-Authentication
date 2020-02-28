@@ -18,4 +18,21 @@ describe('POST /api/auth/register', function()
                 expect(res.status).toBe(201);
             })
     })
+
+    test('password should be hashed and not match the original', function()
+    {
+        const user = {
+            username: 'test2',
+            password: 'password123'
+        };
+
+        return request(server)
+            .post('/api/register')
+            .send(user)
+            .then(res =>
+            {
+                expect(res.body.password).not.toBe(user.password);
+            })
+    })
+
 })
