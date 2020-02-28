@@ -4,7 +4,7 @@ const server = require('../api/server');
 
 describe('/GET /api/jokes', function()
 {
-    test('token is sent', function()
+    test('authorization with token being passed to gain access', function()
     {
         const user = {
             username: 'test1',
